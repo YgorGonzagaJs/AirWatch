@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirWatch - Educação sobre Poluição do Ar</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #308e61;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+      }
+
+      .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #23232e;
+        padding: 40px;
+        height: 8vh;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-list {
+        list-style: none;
+        display: flex;
+      }
+
+      .nav-list li {
+        margin-left: 50px;
+        position: relative;
+      }
+
+      .nav-list li::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #308e61;
+        transition: width 0.3s;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+      }
+
+      .nav-list li:hover::after {
+        width: 100%;
+      }
+
+      .mobile-menu {
+        display: none;
+        cursor: pointer;
+      }
+
+      .mobile-menu div {
+        width: 25px;
+        height: 3px;
+        background: #fff;
+        margin: 5px;
+        transition: all 0.3s ease;
+      }
+
+      main {
+        background: url("img/paginaeduca.jpg") no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding-top: 8vh;
+      }
+
+  .hero-content {
+  position: absolute;
+  top: 45%; 
+  left: 5%;
+  padding: 20px;
+  max-width: 600px;
+  color: white;
+  border-radius: 10px; 
+  animation: slideInContent 1.5s ease-in-out 0.5s forwards;
+}
+
+.hero-content h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 3.5rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-family: monospace;
+  color: #c4c4c4;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); 
+}
+
+@keyframes slideInOverlay {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInContent {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+      .btn {
+        display: inline-block;
+        padding: 12px 36px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #ffffff;
+        background: linear-gradient(135deg, #32a852, #66bb6a);
+        box-shadow: 0 4px 15px rgba(50, 168, 82, 0.4);
+        text-decoration: none;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(50, 168, 82, 0.6);
+      }
+
+  
+      .section {
+        padding: 60px 20px;
+        background: #f4f4f4;
+        color: #333;
+        transition: background 0.5s, color 0.5s;
+      }
+
+      .section:nth-child(even) {
+        background: #fff;
+        color: #333;
+      }
+
+      .section h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section h2::after {
+        content: '';
+        width: 50px;
+        height: 3px;
+        background: #308e61;
+        display: block;
+        margin: 10px auto 0;
+      }
+
+      .section p {
+        max-width: 800px;
+        margin: 0 auto 20px;
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      .section img {
+        display: block;
+        max-width: 80%;
+        height: 300px; 
+        margin: 20px auto;
+        object-fit: cover; 
+        border-radius: 8px;
+      }
+
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .card {
+        background: #43ac76;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s, background 0.3s;
+        cursor: pointer;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        background: #9cc9f0;
+      }
+
+      .card img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+      }
+
+      h3:hover {
+        color: #fff;
+      }
+
+      footer {
+        background-color: #23232e;
+        color: #fff;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+      }
+
+      footer .footer-text {
+        font-size: 18px;
+        color: #308e61;
+        margin: 10px 0;
+      }
+
+      footer .footer-logo {
+        width: 60px;
+        height: 60px;
+        margin: 10px auto;
+        transition: transform 0.3s;
+      }
+
+      footer .footer-logo:hover {
+        transform: rotate(360deg);
+      }
+
+      @media (max-width: 999px) {
+    .nav-list {
+        position: absolute;
+        top: 8vh;
+        right: 0;
+        width: 50vw;
+        height: 92vh;
+        background: #23232e;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
+    }
+    .nav-list li {
+        margin: 20px 0;
+        opacity: 0;
+    }
+    .mobile-menu {
+        display: block;
+    }
+    .nav-list.active {
+        transform: translateX(0);
+    }
+    .nav-list.active li {
+        opacity: 1;
+        transition: opacity 0.3s ease-in;
+    }
+    .section {
+        padding: 40px 10px;
+    }
+    
+    main .white-overlay {
+        display: none !important;
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-content h1 {
+        display: none;
+    }
+
+    .hero-content p {
+        display: none;
+    }
+}
+
+      .white-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%; 
+  height: 100%;
+  background-color: #000000;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 50px; 
+  animation: slideInOverlay 1.5s ease-in-out; 
+}
+
+
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a class="logo" href="index.html">
+          <img src="img/AirWatch.png" alt="Logo do AirWatch" />
+          AIRwatch
+        </a>
+        <div class="mobile-menu">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+        <ul class="nav-list">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="map.html">Mapa e Gráfico</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="white-overlay">
+        <div class="hero-content">
+          <h1>Aprenda mais! </h1>
+          <p>Entenda a importância de um ar limpo para a saúde e o meio ambiente.</p>
+        </div>
+      </div>
+    </main>
+    <section class="section">
+      <h2>Qual a importância do ar? </h2>
+      <p> Todas as pessoas têm o direito de respirar um ar puro. Essa é a base do Dia Internacional do Ar Limpo por um Céu Azul, celebrado em 7 de setembro, uma data criada pela Organização das Nações Unidas (ONU) para chamar a atenção para essa questão importante. A maior parte da população mundial está exposta diariamente a substâncias e resíduos perigosos, aumentando o risco de desenvolver doenças e condições debilitantes ao longo da vida. Segundo um relatório da Organização Mundial da Saúde (OMS), 97% das cidades em países de renda média ou baixa não seguem os padrões de qualidade do ar recomendados pela organização.
+        A OMS também revela que, a cada ano, cerca de sete milhões de mortes prematuras são causadas pelos efeitos da poluição do ar. Além disso, o ar de baixa qualidade também prejudica o clima, a produção de alimentos, a biodiversidade e os ecossistemas.
+      </p>
+      <img src="img/importancia2.png" alt="Imagem ilustrando poluição do ar">
+    </section>
+
+    <section class="section">
+      <h2>O que é Poluição do Ar? </h2>
+      <p>Segundo a CETESB, poluente atmosférico é qualquer matéria ou energia que, em quantidade, concentração ou tempo excessivo, torna o ar impróprio, nocivo ou ofensivo à saúde, ao bem-estar, à fauna, flora e à segurança. A poluição é mais intensa em áreas urbanas devido a veículos, indústrias e usinas termelétricas, que emitem substâncias tóxicas, causando problemas de saúde como dificuldades respiratórias, câncer, doenças cardiovasculares, irritações nos olhos e vias respiratórias, além de agravar doenças como asma e bronquite. Os principais poluentes incluem monóxido de carbono, óxidos de nitrogênio, hidrocarbonetos, dióxido de enxofre e material particulado, e também as queimadas contribuem para a poluição do ar.</p>
+      <img src="img/poluição.jpg" alt="Imagem ilustrando os efeitos da poluição na saúde">
+    </section>
+
+    <section class="section">
+      <h2>Efeitos na Saúde</h2>
+      <p>A poluição do ar é uma grave crise de saúde pública global, responsável por uma em cada nove mortes. A exposição ao material particulado fino (PM 2,5) reduziu a expectativa de vida média mundial em cerca de um ano e oito meses. Essas partículas, com diâmetro inferior a 2,5 micrômetros, penetram nos pulmões e podem atingir a corrente sanguínea, causando doenças fatais como AVC, doenças cardíacas, doenças pulmonares crônicas, infecções respiratórias e câncer de pulmão. Também agravam condições como diabetes, afetam o desenvolvimento cognitivo das crianças e podem causar problemas de saúde mental. A exposição prolongada ao PM 2,5 está associada a declínios no aprendizado, memória e ao aumento de quadros de ansiedade e depressão, tornando a poluição do ar uma preocupação de saúde pública em áreas urbanas e rurais afetadas por queimadas.</p>
+      <img src="img/saude.jpeg" alt="Imagem ilustrando o monitoramento da qualidade do ar">
+    </section>
+
+    <section class="section">
+      <h2>Impactos Ambientais</h2>
+      <p>A poluição do ar causa impactos ambientais significativos, afetando tanto o patrimônio natural quanto cultural. A chuva ácida, formada pela reação de poluentes como óxidos de enxofre e nitrogênio com a água no ar, corroe monumentos e construções históricas, acelerando a degradação de edifícios e esculturas. Além disso, poluentes como os clorofluorocarbonos (CFCs) danificam a camada de ozônio, formando buracos que aumentam o risco de câncer de pele e prejudicam a biodiversidade. A liberação de gases como dióxido de carbono (CO2) e metano (CH4) intensifica o efeito estufa, causando o aquecimento global e mudanças climáticas, como derretimento das calotas polares, aumento do nível do mar e mais eventos climáticos extremos, afetando ecossistemas ao redor do mundo.</p>
+      <img src="img/poluentes.jpg" alt="Imagem ilustrando ações para reduzir a poluição do ar">
+    </section>
+
+    <section class="section">
+      <h2>Medidas de Prevenção e Soluções</h2>
+      <p>Reduzir a poluição do ar exige ações coordenadas em diversas frentes, tanto por parte dos governos quanto por indivíduos e comunidades. Abaixo estão algumas das medidas mais eficazes e explicativas sobre como podemos contribuir para melhorar a qualidade do ar e reduzir os impactos ambientais e na saúde pública.<br><br> <strong>Entenda:</strong></p>
+      <div class="section-topics">
+          <div class="topic">
+              <h3>Transporte Sustentável</h3>
+              <p>A substituição do transporte individual pelo transporte coletivo, como ônibus, trens e metrôs, é uma medida fundamental. Incentivar o uso de bicicletas e a caminhada também contribui significativamente para a redução da emissão de poluentes.</p>
+              <img src="img/sustentavel.jpg" alt="Imagem de transporte sustentável">
+          </div>
+          
+          <div class="topic">
+              <h3>Uso de Energias Renováveis</h3>
+              <p>Promover o uso de energias limpas, como solar e eólica, reduz a dependência de combustíveis fósseis, que são grandes responsáveis pela poluição do ar. A transição para uma matriz energética mais sustentável é essencial para mitigar os impactos da poluição.</p>
+              <img src="img/energias.jpg" alt="Imagem de energias renováveis">
+          </div>
+          
+          <div class="topic">
+              <h3>Eficiência Energética</h3>
+              <p>Implementar práticas de eficiência energética, como o uso de equipamentos e tecnologias que consomem menos energia, contribui para a redução da queima de combustíveis fósseis e, consequentemente, da poluição atmosférica.</p>
+              <img src="img/eficiencia.jpg" alt="Imagem de eficiência energética">
+          </div>
+          
+          <div class="topic">
+              <h3>Legislação e Políticas Públicas</h3>
+              <p>Os governos têm um papel crucial na formulação de leis e políticas que visem à redução das emissões de poluentes. Isso inclui regulamentações mais rigorosas para indústrias e incentivos para a adoção de práticas sustentáveis.</p>
+              <img src="img/leis.jpg" alt="Imagem de legislação e políticas públicas">
+          </div>
+          
+          <div class="topic">
+              <h3>Conscientização e Educação Ambiental</h3>
+              <p>Promover a conscientização sobre a poluição do ar e seus efeitos é fundamental. A educação ambiental nas escolas e comunidades pode incentivar hábitos sustentáveis e mobilizar a população em prol de um ar mais limpo.</p>
+              <img src="img/ambiental.jpg" alt="Imagem de conscientização e educação ambiental">
+          </div>
+      </div>
+    </section>
+
+    <footer>
+      <h2 class="footer-text">“AirWatch: Transformando Dados em Saúde!”</h2>
+      <img src="img/AirWatch.png" alt="Logo AirWatch" class="footer-logo" />
+      <p>&copy; 2024 AirWatch. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const navList = document.querySelector('.nav-list');
+      
+      mobileMenu.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+      });
+    </script>
+  </body>
+</html>

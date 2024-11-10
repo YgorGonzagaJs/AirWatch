@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AirWatch</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #308e61;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #23232e;
+      padding: 40px;
+      height: 8vh;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-list li {
+      margin-left: 50px;
+      position: relative;
+    }
+
+    .nav-list li::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #308e61;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+
+    .nav-list li:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu {
+      display: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu div {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+
+    main {
+      background: url("img/ar.jpg") no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-top: 8vh;
+    }
+
+    .hero-content {
+      margin-top: 150px;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero-content h1 {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      margin-top: 0%;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 36px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(135deg, #32a852, #66bb6a);
+      box-shadow: 0 4px 15px rgba(50, 168, 82, 0.4);
+      text-decoration: none;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(50, 168, 82, 0.6);
+    }
+
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -50%;
+      width: 300%;
+      height: 300%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(45deg) translate(-50%, -50%);
+      transition: all 0.75s ease;
+      border-radius: 50%;
+    }
+
+    .btn:hover::before {
+      left: 150%;
+    }
+
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+
+    .section {
+      padding: 60px 20px;
+      background: #f4f4f4;
+      color: #333;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    .section:nth-child(even) {
+      background: #fff;
+      color: #333;
+    }
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section h2::after {
+      content: '';
+      width: 50px;
+      height: 3px;
+      background: #308e61;
+      display: block;
+      margin: 10px auto 0;
+    }
+
+    .section p {
+      max-width: 800px;
+      margin: 0 auto 20px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: #43ac76;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      background: #9cc9f0;
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    h3:hover {
+      color: #fff;
+    }
+
+    footer {
+      background-color: #23232e;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+    }
+
+    footer .footer-text {
+      font-size: 18px;
+      color: #308e61;
+      margin: 10px 0;
+    }
+
+    footer .footer-logo {
+      width: 60px;
+      height: 60px;
+      margin: 10px auto;
+      transition: transform 0.3s;
+    }
+
+    footer .footer-logo:hover {
+      transform: rotate(360deg);
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 999px) {
+      .nav-list {
+        position: absolute;
+        top: 8vh;
+        right: 0;
+        width: 50vw;
+        height: 92vh;
+        background: #23232e;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
+      }
+
+      .nav-list li {
+        margin: 20px 0;
+        opacity: 0;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .nav-list.active {
+        transform: translateX(0);
+      }
+
+      .nav-list.active li {
+        opacity: 1;
+        transition: opacity 0.3s ease-in;
+      }
+
+      .section {
+        padding: 40px 10px;
+      }
+
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #container {
+        flex-direction: column;
+      }
+
+      #map,
+      #chartContainer {
+        width: 100%;
+      }
+
+      #airQualityCard {
+        max-width: 100%;
+      }
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent;
+      }
+
+      50% {
+        border-color: rgb(0, 0, 0);
+      }
+    }
+
+    #animated-text {
+      color: rgb(255, 255, 255);
+      display: inline-block;
+    }
+
+    .letter-green {
+      color: rgb(0, 0, 0);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="index.html">
+        <img src="img/AirWatch.png" alt="Logo do AirWatch" />
+        AIRwatch
+      </a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="map.html">Mapa e Gráfico</a></li>
+        <li><a href="educacao.html">Educação</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero-content">
+      <h1 id="animated-text">Bem-vindo ao AirWatch!</h1>
+      <p style="
+       color: #ffffff;
+       font-family: monospace;
+       overflow: hidden;
+       white-space: nowrap;
+       border-right: .15em solid orange;
+       animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+       font-weight: bolder;">
+        Monitore a qualidade do ar em tempo real.
+      </p>
+      <a href="map.html" class="btn"><span>Ver Mapa e Gráfico</span></a>
+    </div>
+  </main>
+
+  <section class="section">
+    <h2>Por que o Ar é Importante?</h2>
+    <p>
+      A poluição do ar é um dos maiores desafios que enfrentamos atualmente. Segundo a
+      Organização Mundial da Saúde (OMS), ela é responsável por mais de 7 milhões de
+      mortes prematuras todos os anos! A exposição a poluentes atmosféricos pode causar
+      sérios problemas de saúde, principalmente em crianças, idosos e pessoas com
+      doenças respiratórias.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <img src="img/saude.png" alt="Saúde" />
+        <h3>Impacto na Saúde</h3>
+        <p style="color: #fff;">Doenças respiratórias e cardiovasculares são agravadas pela má qualidade do ar.</p>
+      </div>
+      <div class="card">
+        <img src="img/ambiental.png" alt="Ambiente" />
+        <h3>Impacto Ambiental</h3>
+        <p style="color: #fff;">A poluição do ar contribui para o aquecimento global e destruição de ecossistemas.</p>
+      </div>
+      <div class="card">
+        <img src="img/economia.png" alt="Economia" />
+        <h3>Impacto Econômico</h3>
+        <p style="color: #fff;">Custos com saúde pública e perda de produtividade são elevados devido à poluição.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>O que é o AirWatch?</h2>
+    <p>
+      <strong>AirWatch</strong> é uma plataforma inovadora que utiliza a API Breezometer para monitorar a
+      qualidade do ar em tempo real, fornecendo dados precisos e atualizados sobre os níveis de poluentes.
+    </p>
+    <p>
+      <strong>Visamos oferecer:</strong>
+    </p>
+    <div class="cards">
+      <div class="card">
+        <img src="img/dados.png" alt="Dados" />
+        <h3>Dados Precisos</h3>
+        <p style="color: #fff;">Informações detalhadas e atualizadas sobre a qualidade do ar em sua região.</p>
+      </div>
+      <div class="card">
+        <img src="img/alerta.png" alt="Alertas" />
+        <h3>Alertas em Tempo Real</h3>
+        <p style="color: #fff;">Notificações imediatas sobre níveis críticos de poluição.</p>
+      </div>
+      <div class="card">
+        <img src="img/educacao.png" alt="Educação" />
+        <h3>Educação Ambiental</h3>
+        <p style="color: #fff;">Recursos educacionais para conscientizar sobre a importância do ar limpo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Objetivos</h2>
+    <p>
+      Nosso objetivo é criar uma comunidade informada e engajada na luta contra a poluição do ar. Para isso, focamos em:
+    </p>
+    <div class="cards">
+      <div class="card">
+        <img src="img/interatividade.png" alt="Dados" />
+        <h3>Interatividade</h3>
+        <p style="color: #fff;">Gráfico e mapa intuitivo que mostra a qualidade do ar na sua região, com cores que
+          indicam níveis de risco.</p>
+      </div>
+      <div class="card">
+        <img src="img/educar.png" alt="Alertas" />
+        <h3>Educar</h3>
+        <p style="color: #fff;"> Informações claras e acessíveis sobre os efeitos dos poluentes na saúde e como se
+          proteger.</p>
+      </div>
+      <div class="card">
+        <img src="img/comunidade.png" alt="Educação" />
+        <h3>Ação Comunitária</h3>
+        <p style="color: #fff;">Incentivar a participação da comunidade em ações para melhorar a qualidade do ar.
+
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Por que escolher o AirWatch?</h2>
+    <p>
+      Escolha o AirWatch para ter acesso a informações precisas e em tempo real sobre a qualidade do ar,
+      essencial para proteger sua saúde e a de sua comunidade.
+      Com uma plataforma intuitiva e dados detalhados, o AirWatch permite o monitoramento contínuo da poluição,
+      ajudando você a tomar decisões informadas para minimizar os riscos ambientais.
+      <br><br>
+      <strong> Aqui você encontra:</strong>
+    </p>
+    <div class="cards">
+      <div class="card">
+        <img src="img/transparencia.png" alt="Transparência" />
+        <h3>Transparência</h3>
+        <p style="color: #fff;">Dados abertos e acessíveis para todos os usuários.</p>
+      </div>
+      <div class="card">
+        <img src="img/celular.png" alt="Responsividade" />
+        <h3>Responsividade</h3>
+        <p style="color: #fff;">Design adaptável para uma experiência perfeita em qualquer dispositivo.</p>
+      </div>
+      <div class="card">
+        <img src="img/facil.png" alt="Acessibilidade" />
+        <h3>Acessibilidade</h3>
+        <p style="color: #fff;">Conteúdo apresentado de forma clara e compreensível para todos.</p>
+      </div>
+      <div class="card">
+        <img src="img/consciencia.png" alt="Impacto Social" />
+        <h3>Impacto Social</h3>
+        <p style="color: #fff;">Contribuindo para uma comunidade mais saudável e consciente.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h2 class="footer-text">“AirWatch: Transformando Dados em Saúde!”</h2>
+    <img src="img/AirWatch.png" alt="Logo AirWatch" class="footer-logo" />
+    <p>&copy; 2024 AirWatch. Todos os direitos reservados.</p>
+  </footer>
+  <script src="mobile-navbar.js"></script>
+</body>
+
+</html>
